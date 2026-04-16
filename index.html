@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FileDuel — Compare any two files side-by-side. Text, PDF, Excel, code, images. Every change highlighted. 100% on-device, no uploads, no cloud." />
+  <title>FileDuel — Document Comparison App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --terracotta:  #C94B2D;
+      --terra-dark:  #A33820;
+      --terra-light: #E8734A;
+      --linen:       #F5F3EE;
+      --linen2:      #EFEDE8;
+      --ink:         #1A1814;
+      --ink-mid:     #4A4440;
+      --ink-soft:    #8A7F78;
+      --border:      rgba(180,165,150,0.3);
+      --add:         #065F46;
+      --add-bg:      #D1FAE5;
+      --rem:         #991B1B;
+      --rem-bg:      #FEE2E2;
+      --chg:         #92400E;
+      --chg-bg:      #FEF3C7;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--linen); color: var(--ink);
+      font-family: 'Inter', sans-serif; font-weight: 300;
+      line-height: 1.75; font-size: 16px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--ink); padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-brand {
+      font-size: 18px; font-weight: 600; color: #fff;
+      text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-brand span { color: var(--terra-light); font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none;
+      letter-spacing: 0.03em; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: rgba(255,255,255,0.9); }
+    .nav-cta {
+      background: var(--terracotta); color: #fff !important;
+      padding: 7px 18px; border-radius: 6px; font-weight: 500 !important;
+      font-size: 13px !important; letter-spacing: 0.02em !important;
+    }
+    .nav-cta:hover { background: var(--terra-dark); opacity: 1 !important; }
+    .nav-links a.active { color: var(--terra-light) !important; border-bottom: 2px solid var(--terra-light); padding-bottom: 2px; }
+
+    /* ── Hero ── */
+    header {
+      background: var(--ink); padding: 96px 24px 88px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    header::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 100% at 50% -5%, rgba(201,75,45,0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--terra-light); margin-bottom: 20px;
+      background: rgba(201,75,45,0.12); padding: 5px 14px; border-radius: 20px;
+      border: 1px solid rgba(201,75,45,0.25);
+    }
+    .hero-h1 {
+      font-size: clamp(36px, 6vw, 64px); font-weight: 600;
+      color: #fff; line-height: 1.1; letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .hero-h1 em { color: var(--terra-light); font-style: italic; }
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px); color: rgba(255,255,255,0.55);
+      max-width: 520px; margin: 0 auto 48px; line-height: 1.6; font-weight: 300;
+    }
+    .cta-group { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 8px;
+      font-size: 15px; font-weight: 500; text-decoration: none;
+      transition: all 0.2s; cursor: pointer; border: none; font-family: 'Inter', sans-serif;
+    }
+    .btn-primary { background: var(--terracotta); color: #fff; }
+    .btn-primary:hover { background: var(--terra-dark); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent; color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+
+    /* ── Privacy badge ── */
+    .privacy-strip {
+      background: rgba(255,255,255,0.04); border-top: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07); padding: 14px 24px;
+      display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: center;
+    }
+    .privacy-pill {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 0.04em;
+    }
+    .privacy-pill::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #4ADE80; flex-shrink: 0;
+    }
+
+    /* ── Diff preview ── */
+    .diff-preview {
+      max-width: 680px; margin: 56px auto 0;
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 32px 64px rgba(0,0,0,0.4);
+    }
+    .diff-bar {
+      background: #2A2420; padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-red { background: #FF5F57; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green { background: #28C840; }
+    .diff-labels {
+      margin-left: auto; display: flex; gap: 12px; font-family: 'DM Mono', monospace;
+      font-size: 11px; color: rgba(255,255,255,0.3);
+    }
+    .diff-body { background: #1E1A18; font-family: 'DM Mono', monospace; font-size: 13px; }
+    .diff-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .diff-cell {
+      padding: 7px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .diff-cell.add { background: rgba(6,95,70,0.2); color: #6EE7B7; }
+    .diff-cell.rem { background: rgba(153,27,27,0.2); color: #FCA5A5; }
+    .diff-cell.chg { background: rgba(146,64,14,0.15); color: #FCD34D; }
+    .diff-cell.eq  { color: rgba(255,255,255,0.35); }
+    .diff-cell.divider { grid-column: 1/-1; background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.2); font-size: 11px; padding: 4px 16px; }
+
+    /* ── Main sections ── */
+    main { max-width: 860px; margin: 0 auto; padding: 80px 24px 96px; }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 14px; display: block;
+    }
+    h2 {
+      font-size: clamp(24px, 4vw, 36px); font-weight: 600;
+      color: var(--ink); line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .section-intro {
+      font-size: 17px; color: var(--ink-mid); max-width: 540px; line-height: 1.65;
+    }
+
+    /* ── Format grid ── */
+    .format-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px; margin-top: 40px;
+    }
+    .format-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 12px;
+      padding: 22px 20px; transition: border-color 0.2s, transform 0.2s;
+    }
+    .format-card:hover { border-color: rgba(201,75,45,0.4); transform: translateY(-2px); }
+    .format-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 14px;
+    }
+    .format-name { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+    .format-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+    /* ── Privacy section ── */
+    .privacy-section {
+      background: var(--ink); border-radius: 16px; padding: 56px 48px;
+      margin: 80px 0; position: relative; overflow: hidden;
+    }
+    .privacy-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 100% 100%, rgba(201,75,45,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .privacy-section h2 { color: #fff; }
+    .privacy-section .section-intro { color: rgba(255,255,255,0.55); }
+    .privacy-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; margin-top: 36px;
+    }
+    .privacy-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 20px;
+    }
+    .privacy-card-title { font-size: 14px; font-weight: 500; color: #fff; margin-bottom: 6px; }
+    .privacy-card-body { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.55; }
+    .check-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(74,222,128,0.15); border: 1px solid rgba(74,222,128,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; margin-bottom: 14px; color: #4ADE80;
+    }
+
+    /* ── Features ── */
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px; margin-top: 48px;
+    }
+    .feature {
+      padding: 28px 24px; background: #fff; border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .feature-num {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      color: var(--terracotta); margin-bottom: 12px; display: block;
+    }
+    .feature-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+    .feature-body { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+    /* ── Pro section ── */
+    .pro-box {
+      background: #fff; border: 1px solid var(--border); border-radius: 16px;
+      padding: 48px; margin-top: 80px; display: grid;
+      grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+    }
+    .pro-box h2 { margin-bottom: 10px; }
+    .pro-desc { font-size: 16px; color: var(--ink-mid); margin-bottom: 20px; line-height: 1.6; }
+    .pro-list { list-style: none; }
+    .pro-list li {
+      font-size: 14px; color: var(--ink-mid); padding: 6px 0;
+      border-bottom: 1px solid var(--border); display: flex; gap: 10px;
+    }
+    .pro-list li::before { content: '→'; color: var(--terracotta); flex-shrink: 0; }
+    .pro-list li:last-child { border-bottom: none; }
+    .pro-badge {
+      background: var(--linen2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px 24px; text-align: center; min-width: 180px;
+    }
+    .pro-badge-label { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+    .pro-badge-price { font-size: 32px; font-weight: 600; color: var(--ink); letter-spacing: -0.03em; }
+    .pro-badge-sub { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
+    .pro-badge-stores { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .store-btn {
+      display: block; padding: 8px 14px; border-radius: 7px; font-size: 12px;
+      font-weight: 500; text-decoration: none; text-align: center;
+      background: var(--ink); color: #fff; transition: opacity 0.2s;
+    }
+    .store-btn:hover { opacity: 0.8; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--ink); text-align: center; padding: 32px 24px;
+    }
+    .footer-links {
+      display: flex; flex-wrap: wrap; gap: 6px 24px;
+      justify-content: center; margin-bottom: 14px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.35); text-decoration: none;
+      font-size: 13px; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+    /* ── Divider ── */
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 80px 0; }
+
+    @media (max-width: 640px) {
+      .pro-box { grid-template-columns: 1fr; }
+      .privacy-section { padding: 40px 24px; }
+      nav .nav-links { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" href="https://fileduel.com/" class="nav-brand">File<span>duel</span></a>
+  <div class="nav-links">
+    <a href="#formats">Formats</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#pro">Pro</a>
+    <a href="https://play.google.com/store/apps/details?id=com.fileduel.app" class="nav-cta">Get the app</a>
+  </div>
+</nav>
+
+<header>
+  <span class="hero-eyebrow">Document Comparison App</span>
+  <h1 class="hero-h1">Two files.<br><em>Every change.</em></h1>
+  <p class="hero-sub">Compare any two documents side-by-side. Text, PDF, Excel, code, images — every addition, deletion, and edit highlighted instantly.</p>
+  <div class="cta-group">
+    <a href="https://play.google.com/store/apps/details?id=com.fileduel.app" class="btn btn-primary">
+      ↓ Get on Google Play
+    </a>
+    <a href="https://apps.apple.com" class="btn btn-secondary">
+      ↓ Download on App Store
+    </a>
+  </div>
+
+  <div class="privacy-strip" style="margin-top: 48px;">
+    <span class="privacy-pill">100% on-device</span>
+    <span class="privacy-pill">No uploads ever</span>
+    <span class="privacy-pill">No account required</span>
+    <span class="privacy-pill">No data collection</span>
+  </div>
+
+  <div class="diff-preview">
+    <div class="diff-bar">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+      <div class="diff-labels">
+        <span>Original · A</span>
+        <span>Revised · B</span>
+      </div>
+    </div>
+    <div class="diff-body">
+      <div class="diff-row">
+        <div class="diff-cell eq">version: "1.2.0"</div>
+        <div class="diff-cell add">version: "1.3.0"</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell rem">price: 49.99</div>
+        <div class="diff-cell add">price: 54.99</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell eq">status: active</div>
+        <div class="diff-cell eq">status: active</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell chg">deadline: Mar 31</div>
+        <div class="diff-cell chg">deadline: Apr 15</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell eq">owner: "Alice"</div>
+        <div class="diff-cell eq">owner: "Alice"</div>
+      </div>
+      <div class="diff-row">
+        <div class="diff-cell rem">note: "draft only"</div>
+        <div class="diff-cell add">note: "approved"</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Formats -->
+  <section id="formats">
+    <span class="section-label">Supported formats</span>
+    <h2>Compare anything</h2>
+    <p class="section-intro">Drop any two files — FileDuel figures out the format and shows you exactly what changed.</p>
+
+    <div class="format-grid">
+      <div class="format-card">
+        <div class="format-icon" style="background:#FEF3C7;">📝</div>
+        <div class="format-name">Text & Code</div>
+        <div class="format-desc">Plain text, source code, configs, logs, markdown — any text-based file.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon" style="background:#D1FAE5;">📊</div>
+        <div class="format-name">Excel</div>
+        <div class="format-desc">Cell-by-cell comparison across sheets. Formula diff, row changes, value tracking.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon" style="background:#FEE2E2;">📄</div>
+        <div class="format-name">PDF</div>
+        <div class="format-desc">Text extraction and visual side-by-side diff across pages.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon" style="background:#EDE9FE;">📋</div>
+        <div class="format-name">Word / DOCX</div>
+        <div class="format-desc">Paragraph-level comparison of Word documents.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon" style="background:#E0F2FE;">📸</div>
+        <div class="format-name">Images & OCR</div>
+        <div class="format-desc">Photograph documents and compare extracted text using on-device OCR.</div>
+      </div>
+      <div class="format-card">
+        <div class="format-icon" style="background:#FDF4FF;">🔗</div>
+        <div class="format-name">EDI & CSV</div>
+        <div class="format-desc">Structured data formats, delimited files, and EDI transaction sets.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- Features -->
+  <section>
+    <span class="section-label">How it works</span>
+    <h2>Powerful diff, zero friction</h2>
+    <p class="section-intro">Built around a Myers O(ND) algorithm with Hunt-McIlroy LCS for large files — the same diff engine used by Git.</p>
+
+    <div class="features-grid">
+      <div class="feature">
+        <span class="feature-num">01</span>
+        <div class="feature-title">Split & unified views</div>
+        <div class="feature-body">Toggle between side-by-side split view and unified inline diff depending on your preference.</div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">02</span>
+        <div class="feature-title">Smart diff options</div>
+        <div class="feature-body">Ignore whitespace, case, blank lines, or apply custom regex patterns to filter out noise.</div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">03</span>
+        <div class="feature-title">Excel sheet mapping</div>
+        <div class="feature-body">Choose which sheets to compare, set a key column for row-level matching, detect formula changes.</div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">04</span>
+        <div class="feature-title">Export results</div>
+        <div class="feature-body">Share your diff as HTML, JSON, CSV, or a patch file directly from the app.</div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">05</span>
+        <div class="feature-title">Change navigation</div>
+        <div class="feature-body">Jump between changes with the built-in navigator. See a summary of additions, deletions, and edits.</div>
+      </div>
+      <div class="feature">
+        <span class="feature-num">06</span>
+        <div class="feature-title">Landscape mode</div>
+        <div class="feature-body">Full landscape support on all screens — more diff content, less chrome.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy -->
+  <div class="privacy-section" id="privacy">
+    <span class="section-label" style="color: var(--terra-light);">Privacy by design</span>
+    <h2>Your files never leave your phone</h2>
+    <p class="section-intro">FileDuel processes everything locally. There is no server, no upload, no account. What you compare stays on your device — always.</p>
+    <div class="privacy-grid">
+      <div class="privacy-card">
+        <div class="check-icon">✓</div>
+        <div class="privacy-card-title">Zero data collection</div>
+        <div class="privacy-card-body">We collect no personal data, no file contents, no usage analytics tied to you.</div>
+      </div>
+      <div class="privacy-card">
+        <div class="check-icon">✓</div>
+        <div class="privacy-card-title">On-device OCR</div>
+        <div class="privacy-card-body">Image text extraction uses Google ML Kit locally. Photos are never uploaded to any server.</div>
+      </div>
+      <div class="privacy-card">
+        <div class="check-icon">✓</div>
+        <div class="privacy-card-title">No account needed</div>
+        <div class="privacy-card-body">Open the app, pick two files, compare. No sign-up, no login, no email required.</div>
+      </div>
+      <div class="privacy-card">
+        <div class="check-icon">✓</div>
+        <div class="privacy-card-title">Subscription only via stores</div>
+        <div class="privacy-card-body">Pro upgrades go through Google Play or the App Store. We never see your payment details.</div>
+      </div>
+    </div>
+    <p style="margin-top: 28px; font-size: 13px; color: rgba(255,255,255,0.3);">
+      <a href="https://fileduel.com/privacy.html" style="color: rgba(255,255,255,0.45); text-decoration: underline;">Read the full Privacy Policy →</a>
+    </p>
+  </div>
+
+  <!-- Pro -->
+  <div class="pro-box" id="pro">
+    <div>
+      <span class="section-label">FileDuel Pro</span>
+      <h2>Unlock the full toolkit</h2>
+      <p class="pro-desc">The free version covers text and code comparison. Pro unlocks Excel, PDF, large files, and export.</p>
+      <ul class="pro-list">
+        <li>Excel diff — sheet mapping, formula changes, key-column matching</li>
+        <li>PDF diff — text extraction and visual comparison</li>
+        <li>Files over 500 KB</li>
+        <li>Export as HTML, JSON, CSV, or patch</li>
+      </ul>
+    </div>
+    <div class="pro-badge">
+      <div class="pro-badge-label">Pro</div>
+      <div class="pro-badge-price">Free</div>
+      <div class="pro-badge-sub">during launch period</div>
+      <div class="pro-badge-stores">
+        <a href="https://play.google.com/store/apps/details?id=com.fileduel.app" class="store-btn">Google Play</a>
+        <a href="https://apps.apple.com" class="store-btn">App Store</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://fileduel.com/privacy.html">Privacy Policy</a>
+    <a href="https://fileduel.com/terms.html">Terms of Use</a>
+    <a href="mailto:info@valuespringllc.com">Support</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 FileDuel &nbsp;&middot;&nbsp; All rights reserved</p>
+</footer>
+
+</body>
+</html>

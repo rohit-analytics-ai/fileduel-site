@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — FileDuel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --terracotta: #C94B2D;
+      --terra-light: #E8734A;
+      --linen:      #F5F3EE;
+      --ink:        #1A1814;
+      --ink-mid:    #4A4440;
+      --ink-soft:   #8A7F78;
+      --border:     rgba(180,165,150,0.3);
+      --rule:       rgba(180,165,150,0.2);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--linen); color: var(--ink);
+      font-family: 'Inter', sans-serif; font-weight: 300;
+      line-height: 1.8; font-size: 16px;
+    }
+
+
+    nav {
+      background: var(--ink); padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-brand {
+      font-size: 18px; font-weight: 600; color: #fff;
+      text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-brand span { color: var(--terra-light); font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a {
+      font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none;
+      letter-spacing: 0.03em; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: rgba(255,255,255,0.9); }
+    .nav-links a.active {
+      color: var(--terra-light) !important;
+      border-bottom: 2px solid var(--terra-light);
+      padding-bottom: 2px;
+    }
+    .nav-cta {
+      background: var(--terracotta); color: #fff !important;
+      padding: 7px 18px; border-radius: 6px; font-weight: 500 !important;
+      font-size: 13px !important; letter-spacing: 0.02em !important;
+      border-bottom: none !important;
+    }
+    .nav-cta:hover { background: var(--terra-dark) !important; }
+
+    main { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    .page-title {
+      font-size: clamp(24px, 4vw, 34px); font-weight: 600;
+      color: var(--ink); letter-spacing: -0.02em; margin-bottom: 6px;
+    }
+    .effective {
+      font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em; margin-bottom: 16px;
+    }
+    .nav-line {
+      font-size: 14px; color: var(--ink-soft);
+      margin-bottom: 40px; padding-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-line a { color: var(--terracotta); text-decoration: none; font-weight: 500; }
+    .nav-line a:hover { text-decoration: underline; }
+
+    section { margin-bottom: 44px; }
+
+    h2 {
+      font-size: 18px; font-weight: 500; color: var(--terracotta);
+      letter-spacing: -0.01em; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    h2::before {
+      content: ''; display: inline-block; width: 16px; height: 1.5px;
+      background: var(--terracotta); flex-shrink: 0;
+    }
+
+    p { margin-bottom: 14px; color: var(--ink-mid); }
+    p:last-child { margin-bottom: 0; }
+
+    ul { list-style: none; padding: 0; margin-bottom: 14px; }
+    ul li {
+      padding: 9px 0 9px 22px; position: relative;
+      border-bottom: 1px solid var(--rule); color: var(--ink-mid);
+    }
+    ul li:first-child { border-top: 1px solid var(--rule); }
+    ul li::before {
+      content: '→'; position: absolute; left: 0; color: var(--terracotta);
+      font-size: 12px; top: 11px;
+    }
+
+    .zero-box {
+      background: #fff; border: 1px solid var(--border);
+      border-left: 4px solid #4ADE80; border-radius: 0 10px 10px 0;
+      padding: 18px 22px; margin: 20px 0;
+    }
+    .zero-box-title {
+      font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px;
+    }
+    .zero-box p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+    .highlight-box {
+      background: rgba(201,75,45,0.06); border-left: 3px solid var(--terracotta);
+      border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0;
+      font-size: 15px; color: var(--ink-mid);
+    }
+
+    .contact-card {
+      background: var(--ink); border-radius: 12px; padding: 28px 32px;
+      color: rgba(255,255,255,0.6); font-size: 15px;
+    }
+    .contact-card a { color: var(--terra-light); text-decoration: none; font-weight: 500; }
+    .contact-card a:hover { text-decoration: underline; }
+
+    footer {
+      background: var(--ink); text-align: center; padding: 28px 24px;
+    }
+    .footer-links {
+      display: flex; flex-wrap: wrap; gap: 6px 20px;
+      justify-content: center; margin-bottom: 12px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.35); text-decoration: none;
+      font-size: 13px; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://fileduel.com/" class="nav-brand">File<span>duel</span></a>
+  <div class="nav-links">
+    <a href="https://fileduel.com/">Home</a>
+    <a href="https://fileduel.com/privacy.html" class="active">Privacy Policy</a>
+    <a href="https://fileduel.com/terms.html">Terms of Use</a>
+    <a href="mailto:info@valuespringllc.com" class="nav-cta">Support</a>
+  </div>
+</nav>
+
+<main>
+  <h1 class="page-title">Privacy Policy</h1>
+  <p class="effective">Effective Date: April 16, 2026 &nbsp;·&nbsp; Last Updated: April 16, 2026</p>
+  <p class="nav-line">
+    Related: <a href="https://fileduel.com/terms.html">Terms of Use</a>
+  </p>
+
+  <section>
+    <div class="zero-box">
+      <div class="zero-box-title">FileDuel collects no personal data.</div>
+      <p>All file processing happens entirely on your device. Your files, documents, and photos are never uploaded, stored on a server, or shared with anyone — including us.</p>
+    </div>
+    <p>This policy explains what limited information is handled in connection with your use of FileDuel and your rights regarding it.</p>
+  </section>
+
+  <section>
+    <h2>What we do not collect</h2>
+    <p>FileDuel does not collect, transmit, store, or process any of the following:</p>
+    <ul>
+      <li>The content of any files you compare</li>
+      <li>Your name, email address, or any personally identifying information</li>
+      <li>Your location</li>
+      <li>Device identifiers or advertising IDs</li>
+      <li>Usage analytics, crash reports, or telemetry tied to you</li>
+      <li>Camera images or photos</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>File access and processing</h2>
+    <p>When you select files for comparison, FileDuel reads them directly on your device to perform the diff. No file content is sent to any server at any point. Files are held in memory only for as long as the comparison session is active and are not written to any external storage.</p>
+    <div class="highlight-box">
+      FileDuel has no server-side infrastructure for file processing. There is nothing to upload to because no backend service receives your files.
+    </div>
+  </section>
+
+  <section>
+    <h2>Camera and image permissions</h2>
+    <p>If you use the image comparison feature, FileDuel may request permission to access your camera or photo library. This permission is used solely to capture or select images for on-device text extraction (OCR).</p>
+    <p>OCR processing is performed entirely on-device using Google ML Kit. No image data, extracted text, or OCR results are transmitted to Google or any other party as part of this feature. Google ML Kit operates in a local, on-device mode for this use case.</p>
+  </section>
+
+  <section>
+    <h2>Subscriptions and payments</h2>
+    <p>FileDuel offers optional Pro features available via subscription. Subscriptions are managed entirely by the platform app store:</p>
+    <ul>
+      <li><strong>Android</strong> — subscription managed by Google Play Billing. FileDuel does not receive or store your payment method, card details, or billing address.</li>
+      <li><strong>iOS</strong> — subscription managed by Apple App Store. FileDuel does not receive or store your payment method, card details, or billing address.</li>
+    </ul>
+    <p>The only subscription-related data FileDuel accesses is whether your account has an active Pro entitlement, which is verified locally via the platform's billing APIs. Your purchase history and payment details remain entirely within Google's or Apple's systems.</p>
+  </section>
+
+  <section>
+    <h2>Third-party services</h2>
+    <p>FileDuel integrates the following third-party components. Neither sends your file content to external servers:</p>
+    <ul>
+      <li><strong>Google ML Kit (Text Recognition)</strong> — on-device OCR library. Operates entirely locally; no data is sent to Google as part of OCR operations. Subject to Google's ML Kit terms.</li>
+      <li><strong>Google Play Billing</strong> — subscription and payment management for Android. Subject to Google Play's privacy policy.</li>
+      <li><strong>Apple StoreKit</strong> — subscription and payment management for iOS. Subject to Apple's privacy policy.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Children's privacy</h2>
+    <p>FileDuel is a general productivity tool and does not knowingly collect information from children under the age of 13 (or the applicable minimum age in your jurisdiction). Since FileDuel collects no personal data from any user, no special procedures apply, but if you believe a child has inadvertently provided information through the app, please contact us and we will address the concern promptly.</p>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>We may update this Privacy Policy to reflect changes to the app or legal requirements. When we do, we will revise the "Last Updated" date at the top of this page. Continued use of FileDuel after a revised policy is posted constitutes acceptance of the changes, to the extent permitted by law.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <p>Questions about this Privacy Policy or your data? We're happy to help.</p>
+      <p style="margin-top: 12px;">
+        Email: <a href="mailto:info@valuespringllc.com">info@valuespringllc.com</a><br />
+        FileDuel is operated by ValueSpring LLC, United States.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://fileduel.com/">Home</a>
+    <a href="https://fileduel.com/privacy.html">Privacy Policy</a>
+    <a href="https://fileduel.com/terms.html">Terms of Use</a>
+    <a href="mailto:info@valuespringllc.com">Support</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 FileDuel &nbsp;&middot;&nbsp; All rights reserved</p>
+</footer>
+
+</body>
+</html>

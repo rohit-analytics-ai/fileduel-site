@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Use — FileDuel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --terracotta: #C94B2D;
+      --terra-light: #E8734A;
+      --linen:      #F5F3EE;
+      --ink:        #1A1814;
+      --ink-mid:    #4A4440;
+      --ink-soft:   #8A7F78;
+      --border:     rgba(180,165,150,0.3);
+      --rule:       rgba(180,165,150,0.2);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--linen); color: var(--ink);
+      font-family: 'Inter', sans-serif; font-weight: 300;
+      line-height: 1.8; font-size: 16px;
+    }
+
+
+    nav {
+      background: var(--ink); padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-brand {
+      font-size: 18px; font-weight: 600; color: #fff;
+      text-decoration: none; letter-spacing: -0.02em;
+    }
+    .nav-brand span { color: var(--terra-light); font-style: italic; }
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links a {
+      font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none;
+      letter-spacing: 0.03em; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: rgba(255,255,255,0.9); }
+    .nav-links a.active {
+      color: var(--terra-light) !important;
+      border-bottom: 2px solid var(--terra-light);
+      padding-bottom: 2px;
+    }
+    .nav-cta {
+      background: var(--terracotta); color: #fff !important;
+      padding: 7px 18px; border-radius: 6px; font-weight: 500 !important;
+      font-size: 13px !important; letter-spacing: 0.02em !important;
+      border-bottom: none !important;
+    }
+    .nav-cta:hover { background: var(--terra-dark) !important; }
+
+    main { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    .page-title {
+      font-size: clamp(24px, 4vw, 34px); font-weight: 600;
+      color: var(--ink); letter-spacing: -0.02em; margin-bottom: 6px;
+    }
+    .effective {
+      font-size: 13px; color: var(--ink-soft); letter-spacing: 0.04em; margin-bottom: 16px;
+    }
+    .nav-line {
+      font-size: 14px; color: var(--ink-soft);
+      margin-bottom: 40px; padding-bottom: 32px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-line a { color: var(--terracotta); text-decoration: none; font-weight: 500; }
+    .nav-line a:hover { text-decoration: underline; }
+
+    section { margin-bottom: 44px; }
+
+    h2 {
+      font-size: 18px; font-weight: 500; color: var(--terracotta);
+      letter-spacing: -0.01em; margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    h2::before {
+      content: ''; display: inline-block; width: 16px; height: 1.5px;
+      background: var(--terracotta); flex-shrink: 0;
+    }
+
+    p { margin-bottom: 14px; color: var(--ink-mid); }
+    p:last-child { margin-bottom: 0; }
+
+    ul { list-style: none; padding: 0; margin-bottom: 14px; }
+    ul li {
+      padding: 9px 0 9px 22px; position: relative;
+      border-bottom: 1px solid var(--rule); color: var(--ink-mid);
+    }
+    ul li:first-child { border-top: 1px solid var(--rule); }
+    ul li::before {
+      content: '→'; position: absolute; left: 0; color: var(--terracotta);
+      font-size: 12px; top: 11px;
+    }
+
+    .highlight-box {
+      background: rgba(201,75,45,0.06); border-left: 3px solid var(--terracotta);
+      border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0;
+      font-size: 15px; color: var(--ink-mid);
+    }
+
+    .contact-card {
+      background: var(--ink); border-radius: 12px; padding: 28px 32px;
+      color: rgba(255,255,255,0.6); font-size: 15px;
+    }
+    .contact-card a { color: var(--terra-light); text-decoration: none; font-weight: 500; }
+    .contact-card a:hover { text-decoration: underline; }
+
+    footer {
+      background: var(--ink); text-align: center; padding: 28px 24px;
+    }
+    .footer-links {
+      display: flex; flex-wrap: wrap; gap: 6px 20px;
+      justify-content: center; margin-bottom: 12px;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.35); text-decoration: none;
+      font-size: 13px; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://fileduel.com/" class="nav-brand">File<span>duel</span></a>
+  <div class="nav-links">
+    <a href="https://fileduel.com/">Home</a>
+    <a href="https://fileduel.com/privacy.html">Privacy Policy</a>
+    <a href="https://fileduel.com/terms.html" class="active">Terms of Use</a>
+    <a href="mailto:info@valuespringllc.com" class="nav-cta">Support</a>
+  </div>
+</nav>
+
+<main>
+  <h1 class="page-title">Terms of Use</h1>
+  <p class="effective">Effective Date: April 16, 2026 &nbsp;·&nbsp; Last Updated: April 16, 2026</p>
+  <p class="nav-line">
+    Related: <a href="https://fileduel.com/privacy.html">Privacy Policy</a>
+  </p>
+
+  <section>
+    <p>These Terms of Use govern your use of the FileDuel mobile application and any related services. By downloading or using FileDuel, you agree to these Terms. If you do not agree, do not use the app.</p>
+  </section>
+
+  <section>
+    <h2>Nature of the service</h2>
+    <p>FileDuel is a document comparison tool that processes files entirely on your device. The app compares two files and highlights differences between them. It supports text, code, PDF, Excel, Word, image (via on-device OCR), CSV, and EDI formats.</p>
+    <p>FileDuel does not provide legal, financial, editorial, or professional review services. Comparison output is generated algorithmically and reflects the literal differences between the files provided. You are responsible for interpreting and acting on any comparison results.</p>
+  </section>
+
+  <section>
+    <h2>Acceptable use</h2>
+    <p>You agree to use FileDuel only for lawful purposes and in a manner consistent with these Terms. You agree not to:</p>
+    <ul>
+      <li>Use FileDuel to process files you do not have the right to access or compare</li>
+      <li>Attempt to reverse engineer, decompile, or tamper with the app or its algorithms</li>
+      <li>Use automated tools or scripts to abuse, scrape, or interfere with the app</li>
+      <li>Use the app for any unlawful, deceptive, or fraudulent purpose</li>
+      <li>Attempt to circumvent any access controls or subscription verification</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>File access and privacy</h2>
+    <p>FileDuel reads files you select solely to perform the comparison you request. No file content is transmitted to any server. All processing is performed locally on your device.</p>
+    <p>You remain solely responsible for the files you compare and for ensuring you have appropriate rights to access and process those files. See our <a href="https://fileduel.com/privacy.html">Privacy Policy</a> for full details on data handling.</p>
+  </section>
+
+  <section>
+    <h2>Pro subscription and payments</h2>
+    <p>FileDuel offers a free tier and an optional Pro subscription. Pro features include Excel diff, PDF diff, large file support, and export capabilities.</p>
+    <p>Subscriptions are processed and managed through the platform app stores:</p>
+    <ul>
+      <li><strong>Android</strong> — payment processed by Google Play Billing, subject to Google Play's terms and billing policies</li>
+      <li><strong>iOS</strong> — payment processed by Apple App Store, subject to Apple's terms and billing policies</li>
+    </ul>
+    <p>Subscription fees, renewal terms, and cancellation procedures are governed by the relevant store's policies. FileDuel does not process or store your payment information directly.</p>
+    <div class="highlight-box">
+      Pro features are currently available free of charge during our launch period. Pricing may be introduced in a future update with advance notice.
+    </div>
+  </section>
+
+  <section>
+    <h2>Intellectual property</h2>
+    <p>FileDuel, including its diff engine, interface, algorithms, branding, and code, is owned by ValueSpring LLC. You are granted a limited, non-exclusive, non-transferable licence to use the app for personal or internal business purposes.</p>
+    <p>You retain full ownership of any files you compare. FileDuel claims no rights over your documents or their contents.</p>
+  </section>
+
+  <section>
+    <h2>Availability and changes</h2>
+    <p>We make reasonable efforts to keep FileDuel available and functional, but we do not guarantee uninterrupted availability. Features may be updated, modified, or removed at any time.</p>
+    <p>We reserve the right to suspend or terminate access to the app where misuse, abuse, security threats, or violations of these Terms are detected or reasonably suspected.</p>
+  </section>
+
+  <section>
+    <h2>Limitation of liability</h2>
+    <p>To the fullest extent permitted by applicable law, FileDuel and its operators are not liable for any direct, indirect, incidental, special, or consequential damages arising from your use of the app or from reliance on comparison output. The app is provided "as is" without warranty of any kind.</p>
+    <p>FileDuel does not guarantee the accuracy or completeness of comparison results. You are responsible for verifying results that inform decisions of consequence.</p>
+  </section>
+
+  <section>
+    <h2>Changes to these terms</h2>
+    <p>We may update these Terms from time to time. When we do, we will revise the "Last Updated" date at the top of this page. Continued use of FileDuel after updated Terms are posted constitutes acceptance of the changes, to the extent permitted by law.</p>
+  </section>
+
+  <section>
+    <h2>Dispute resolution</h2>
+    <p>Any disputes arising out of or relating to these Terms or your use of FileDuel shall be resolved through binding individual arbitration, except where prohibited by applicable law. You waive any right to participate in a class action related to FileDuel.</p>
+  </section>
+
+  <section>
+    <h2>Governing law</h2>
+    <p>These Terms are governed by the laws of the United States, without regard to conflict of law principles, and without prejudice to any mandatory consumer protection rights you may have under the laws of your jurisdiction of residence.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <p>Questions about these Terms? Contact us at any time.</p>
+      <p style="margin-top: 12px;">
+        Email: <a href="mailto:info@valuespringllc.com">info@valuespringllc.com</a><br />
+        FileDuel is operated by ValueSpring LLC, United States.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://fileduel.com/">Home</a>
+    <a href="https://fileduel.com/privacy.html">Privacy Policy</a>
+    <a href="https://fileduel.com/terms.html">Terms of Use</a>
+    <a href="mailto:info@valuespringllc.com">Support</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 FileDuel &nbsp;&middot;&nbsp; All rights reserved</p>
+</footer>
+
+</body>
+</html>
