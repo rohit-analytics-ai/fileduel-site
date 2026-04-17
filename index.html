@@ -249,7 +249,10 @@
     .pro-badge-price { font-size: 32px; font-weight: 600; color: var(--ink); letter-spacing: -0.03em; }
     .pro-badge-sub { font-size: 13px; color: var(--ink-soft); margin-top: 4px; }
     .pro-badge-stores { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
-    .store-btn {
+    .store-soon {
+        opacity: 0.45; cursor: default; font-style: italic;
+      }
+      .store-btn {
       display: block; padding: 8px 14px; border-radius: 7px; font-size: 12px;
       font-weight: 500; text-decoration: none; text-align: center;
       background: var(--ink); color: #fff; transition: opacity 0.2s;
@@ -301,9 +304,7 @@
     <a href="https://play.google.com/store/apps/details?id=com.fileduel.app" class="btn btn-primary">
       ↓ Get on Google Play
     </a>
-    <a href="https://apps.apple.com" class="btn btn-secondary">
-      ↓ Download on App Store
-    </a>
+    <span class="btn btn-secondary" style="opacity:0.45;cursor:default;font-style:italic;">App Store — coming soon</span>
   </div>
 
   <div class="privacy-strip" style="margin-top: 48px;">
@@ -400,7 +401,7 @@
   <section>
     <span class="section-label">How it works</span>
     <h2>Powerful diff, zero friction</h2>
-    <p class="section-intro">Built around a Myers O(ND) algorithm with Hunt-McIlroy LCS for large files — the same diff engine used by Git.</p>
+    <p class="section-intro">Built around a Myers O(ND) algorithm with Hunt-McIlroy LCS for large files — the same class of diff engine that powers Git and modern code review tools.</p>
 
     <div class="features-grid">
       <div class="feature">
@@ -460,7 +461,7 @@
       <div class="privacy-card">
         <div class="check-icon">✓</div>
         <div class="privacy-card-title">Subscription only via stores</div>
-        <div class="privacy-card-body">Pro upgrades go through Google Play or the App Store. We never see your payment details.</div>
+        <div class="privacy-card-body">Pro upgrades go through Google Play (iOS coming soon). We never see your payment details.</div>
       </div>
     </div>
     <p style="margin-top: 28px; font-size: 13px; color: rgba(255,255,255,0.3);">
@@ -487,7 +488,7 @@
       <div class="pro-badge-sub">during launch period</div>
       <div class="pro-badge-stores">
         <a href="https://play.google.com/store/apps/details?id=com.fileduel.app" class="store-btn">Google Play</a>
-        <a href="https://apps.apple.com" class="store-btn">App Store</a>
+        <span class="store-btn store-soon">App Store — coming soon</span>
       </div>
     </div>
   </div>

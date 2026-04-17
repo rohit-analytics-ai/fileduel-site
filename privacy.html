@@ -117,8 +117,9 @@
 
     .contact-card {
       background: var(--ink); border-radius: 12px; padding: 28px 32px;
-      color: rgba(255,255,255,0.6); font-size: 15px;
+      color: rgba(255,255,255,0.85); font-size: 15px;
     }
+    .contact-card p { color: rgba(255,255,255,0.85); margin-bottom: 0; }
     .contact-card a { color: var(--terra-light); text-decoration: none; font-weight: 500; }
     .contact-card a:hover { text-decoration: underline; }
 
@@ -196,7 +197,7 @@
     <p>FileDuel offers optional Pro features available via subscription. Subscriptions are managed entirely by the platform app store:</p>
     <ul>
       <li><strong>Android</strong> — subscription managed by Google Play Billing. FileDuel does not receive or store your payment method, card details, or billing address.</li>
-      <li><strong>iOS</strong> — subscription managed by Apple App Store. FileDuel does not receive or store your payment method, card details, or billing address.</li>
+      <li><strong>iOS</strong> — <em>coming soon.</em> When available, subscription will be managed by Apple App Store. FileDuel will not receive or store your payment method, card details, or billing address.</li>
     </ul>
     <p>The only subscription-related data FileDuel accesses is whether your account has an active Pro entitlement, which is verified locally via the platform's billing APIs. Your purchase history and payment details remain entirely within Google's or Apple's systems.</p>
   </section>
@@ -207,7 +208,7 @@
     <ul>
       <li><strong>Google ML Kit (Text Recognition)</strong> — on-device OCR library. Operates entirely locally; no data is sent to Google as part of OCR operations. Subject to Google's ML Kit terms.</li>
       <li><strong>Google Play Billing</strong> — subscription and payment management for Android. Subject to Google Play's privacy policy.</li>
-      <li><strong>Apple StoreKit</strong> — subscription and payment management for iOS. Subject to Apple's privacy policy.</li>
+      <li><strong>Apple StoreKit</strong> — subscription and payment management for iOS <em>(coming soon)</em>. Subject to Apple's privacy policy.</li>
     </ul>
   </section>
 
